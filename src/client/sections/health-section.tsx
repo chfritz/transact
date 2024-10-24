@@ -22,7 +22,7 @@ const ROSTool = ({ device }) => {
       console.log('subscribing', device);
       subscribe(1, "/myname");
     }
-  }, [ready, device]);
+  }, [ready]);
 
   log.debug({device, deviceData});
 
