@@ -14,30 +14,34 @@ log.setLevel('debug');
 const host = import.meta.env.VITE_HOST; // Transitive deployment
 const insecure = import.meta.env.VITE_INSECURE
 
-const ROSTool = ({ device }) => {
-  const { ready, subscribe, deviceData } = useContext(CapabilityContext);
+
+const ROSTool = ({ deviceId }) => {
+  const { ready, mqttSync, isReady, device, subscribe, unsubscribe, deviceData }
+    = useContext(CapabilityContext);
 
   useEffect(() => {
-    if (ready) {
-      console.log('subscribing', device);
+    if (ready && isReady()) {
       subscribe(1, "/myname");
     }
-  }, [ready]);
-
-  log.debug({device, deviceData});
+    return () => {
+      unsubscribe?.(1, "/myname");
+    }
+  }, [ready, subscribe]);
 
   return <div>
-    ROS Tool: {device}, {deviceData?.ros?.[1].messages?.myname.data}
+    ROS Tool: {deviceId}, {deviceData?.ros?.[1].messages?.myname.data}
   </div>
-}
+};
 
-const ROSToolContext = ({ device }) => {
+
+const ROSToolContext = ({ deviceId }) => {
   const jwt = useContext(JWTContext);
 
   return <CapabilityContextProvider jwt={jwt} host={host} ssl={!insecure}>
-    <ROSTool device={ device } />
+    <ROSTool {...{ deviceId }} />
   </CapabilityContextProvider>;
 };
+
 
 export function HealthSection() {
   const { deviceId } = useParams();
@@ -65,10 +69,10 @@ export function HealthSection() {
         <div
           className="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm"
         >
-          {device &&
-              <JWTContextProvider device={device}
+          {deviceId &&
+              <JWTContextProvider device={deviceId}
                 capability='@transitive-robotics/ros-tool'>
-                <ROSToolContext device={device} />
+                <ROSToolContext deviceId={deviceId} />
               </JWTContextProvider>
           }
         </div>
