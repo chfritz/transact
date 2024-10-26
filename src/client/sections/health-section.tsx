@@ -16,17 +16,17 @@ const insecure = import.meta.env.VITE_INSECURE
 
 
 const ROSTool = ({ deviceId }) => {
-  const { ready, mqttSync, isReady, device, subscribe, unsubscribe, deviceData }
+  const { mqttSync, isReady, device, subscribe, unsubscribe, deviceData }
     = useContext(CapabilityContext);
 
   useEffect(() => {
-    if (ready && isReady()) {
+    if (isReady?.()) {
       subscribe(1, "/myname");
     }
     return () => {
       unsubscribe?.(1, "/myname");
     }
-  }, [ready, subscribe]);
+  }, [isReady, subscribe]);
 
   return <div>
     ROS Tool: {deviceId}, {deviceData?.ros?.[1].messages?.myname.data}
