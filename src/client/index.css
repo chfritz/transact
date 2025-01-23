@@ -134,14 +134,29 @@
 }
 
 /* Capability specific styling */
-
-.webrtc-video-wrapper video {
-  display: inline;
-}
-
 .webrtc-video-wrapper {
   display: flex;
   justify-content: space-around;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.webrtc-video-wrapper .webrtc-video0 {
+  flex: 1 1 100%;
+}
+
+.webrtc-video-wrapper .webrtc-video1 {
+  flex: 1 1 32%;
+  min-width: 3em;
+}
+.webrtc-video-wrapper .webrtc-video2 {
+  flex: 1 1 32%;
+  min-width: 3em;
+}
+.webrtc-video-wrapper .webrtc-video3 {
+  flex: 1 1 32%;
+  min-width: 3em;
 }
 
 .dark webrtc-video-fleet div *, .dark remote-teleop-fleet div *, .dark terminal-fleet div * {
@@ -152,6 +167,8 @@
 .remote-teleop-wrapper .controls-wrapper {
   justify-content: center;
 }
+
+
 
 .terminal-wrapper .xterm .xterm-viewport {
   overflow-y: hidden;

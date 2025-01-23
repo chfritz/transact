@@ -50,14 +50,36 @@ export function DeviceSection() {
                 <JWTCapability
                   device={deviceId}
                   capability={'@transitive-robotics/remote-teleop'}
-                  control_rosVersion='1'
-                  control_topic='/joy'
-                  control_type='sensor_msgs/Joy'
-                  count='2'
-                  quantizer='25'
-                  timeout='1800'
-                  type='videotestsrc'
-                  type_1='videotestsrc'
+                  control_rosVersion="1"
+                  control_topic="/joy"
+                  control_type="sensor_msgs/Joy"
+                  count="4"
+                  framerate="15/1"
+                  framerate_1="15/1"
+                  framerate_2="15/1"
+                  framerate_3="15/1"
+                  height="360"
+                  height_1="480"
+                  height_2="540"
+                  height_3="360"
+                  quantizer="25"
+                  source="/dev/video18"
+                  source_1="/dev/video6"
+                  source_2="/dev/video8"
+                  source_3="/dev/video10"
+                  streamtype="video/x-raw"
+                  streamtype_1="image/jpeg"
+                  streamtype_2="video/x-raw"
+                  streamtype_3="image/jpeg"
+                  timeout="1800"
+                  type="v4l2src"
+                  type_1="v4l2src"
+                  type_2="v4l2src"
+                  type_3="v4l2src"
+                  width="640"
+                  width_1="640"
+                  width_2="960"
+                  width_3="640"
                   />
               </div>
             )}
